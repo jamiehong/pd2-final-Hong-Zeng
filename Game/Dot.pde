@@ -15,4 +15,5 @@ public class Dot{
   public void drop(){
   }  
   
+
 }
