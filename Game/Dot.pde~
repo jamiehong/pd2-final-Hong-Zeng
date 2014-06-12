@@ -4,18 +4,16 @@ public class Dot{
   private int yCor;
   private Dot next;
   private Board brd;
-  
-  private Dot next;
-  
-  public Dot(color a){
+    
+  public Dot(color a, int x, int y){
       col = a;
+      xCor = x;
+      yCor = y;
       next = null;
+  }
+
+  public void drop(){
   }  
   
-  public clearDot(){
-  	 Dot temp = this;
-	 while (temp.getNext() != null){
-	       temp = temp.getNext();
-	 }  
 
 }
