@@ -1,9 +1,8 @@
 public class Dot{
-  private color col;
-  private int xCor;
-  private int yCor;
+  private color colr;
   private Dot next;
   private Board brd;
+<<<<<<< HEAD
   
   private Dot next;
   
@@ -17,5 +16,21 @@ public class Dot{
 	 while (temp.getNext() != null){
 	       temp = temp.getNext();
 	 }  
+=======
+  private boolean flagged;
+    
+  public Dot(color a){
+      colr = a;
+      next = null;
+  }
+  
+  public Dot getNext(){return next;}
+  public void setNext(Dot a){next = a;}
+  
+  public boolean getFlagged(){return flagged;}
+  public void flag(){flagged = true;}
+  
+  public color getColor(){return colr;}
+>>>>>>> FETCH_HEAD
 
 }
