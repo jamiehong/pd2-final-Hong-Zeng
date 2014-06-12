@@ -1,19 +1,20 @@
 public class Dot{
   private color col;
-  private int xCor;
-  private int yCor;
   private Dot next;
   private Board brd;
+  private boolean flagged;
     
-  public Dot(color a, int x, int y){
+  public Dot(color a){
       col = a;
-      xCor = x;
-      yCor = y;
       next = null;
   }
-
-  public void drop(){
-  }  
   
+  public Dot getNext(){return Dot;}
+  public void setNext(Dot a){next = a;}
+  
+  public boolean getFlagged(){return flagged;}
+  public void flag(){flagged = true};
+  
+  public color getColor(){return color;}
 
 }

@@ -1,13 +1,5 @@
-// Learning Processing
-// Daniel Shiffman
-// http://www.learningprocessing.com
 
-// Example 16-6: Drawing a grid of squares
-
-// Size of each cell in the grid, ratio of window size to video size
-// 80 * 8 = 640
-// 60 * 8 = 480
-int videoScale = 24;
+int videoScale = 25;
 
 // Number of columns and rows in our system
 int cols, rows;
@@ -30,8 +22,8 @@ void setup() {
     for (int j = 3; j < 9; j++) {
       
       // Scaling up to draw a rectangle at (x,y)
-      int x = i*videoScale*2+12;
-      int y = j*videoScale*2+12+150;
+      int x = i*videoScale*2;
+      int y = j*videoScale*2+150;
       fill(a.randColor());
       stroke(0);
       // For every column and row, a rectangle is drawn at an (x,y) location scaled and sized by videoScale.
@@ -41,7 +33,7 @@ void setup() {
   noLoop();
 }
 
-void draw() {
+void draw() { 
   
 
 }
