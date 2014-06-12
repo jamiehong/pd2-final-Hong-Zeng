@@ -13,7 +13,7 @@ public class Dot{
   public void setNext(Dot a){next = a;}
   
   public boolean getFlagged(){return flagged;}
-  public void flag(){flagged = true};
+  public void flag(){flagged = true;}
   
   public color getColor(){return color;}
 
