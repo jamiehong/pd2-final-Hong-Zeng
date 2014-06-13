@@ -3,13 +3,14 @@ int videoScale = 25;
 int time;
 int score;
 
-Dot start; //the first dot you click
-Dot current; //the dot being worked on
-
+Dot currentD; //the dot being worked on
+int[] xyDeletes = new int[72]; //to store xy of dots to be deleted
+int deletions; //# of deletions
+Board a;
+boolean square; //if you make a square, all dots of that color get deleted.
 
 void setup() {
   
-  Board a = new Board();
 
   size(600, 800);
   
@@ -61,7 +62,7 @@ int XMouseToCart(int x){
       return -1;
   }
   else return -1;
-}
+}//needs testing...
 
 int YMouseToCart(int y){
   return XMouseToCart(y - 150);
@@ -75,3 +76,85 @@ int YCartToMouse(int y){
   return (y+6)*50+150;
 }
 
+boolean within(int x, int y){   //true if mouse is on the dot, false if not.. inputs 0-5
+  if (x < 0 || x > 5 || y < 0 || x > 5)
+    return false;
+  else{
+    int a = XCartToMouse(x);
+    int b = YCartToMouse(y);
+    if (abs(a-mouseX) <= 12 && abs(b-mouseY) <= 12)
+      return true;
+    else
+      return false;
+  }
+}//needs testing
+
+void mousePressed(){
+  /*
+  int x = XMouseToCart(mouseX);
+  int y = YMouseToCart(mouseY);
+  if (x != -1 && y!= -1){
+    currentD = a.get(x,y);
+    currentD.flag();
+    deletions = 1;
+    xyDeletes[0] = x;
+    xyDeletes[1] = y;
+  }
+  
+  */
+  //to test the conversions
+  println(XMouseToCart(mouseX));
+  println(YMouseToCart(mouseY));
+}
+
+
+void mouseDragged(){
+  int x = xyDeletes[deletions*2-2];
+  int y = xyDeletes[deletions*2-1];
+  Dot woah;
+  if (within(x-1,y))
+    woah = a[x-1,y];
+  else if (within(x,y-1))
+    woah = a[x,y-1];
+  else if (within(x+1,y))
+    woah = a[x+1,y];
+  else if (within(x,y+1))
+    woah = a[x,y+1];
+    
+  if (woah != null && woah.getColor().equals(currentD.getColor())){
+    if (woah.equals(currentD.getPrev())){
+      deletions--;
+      currentD.unFlag();
+      currentD = currentD.getPrev();
+      
+    }
+    else{
+      woah.setPrev(currentD)
+      currentD = woah;
+      if (currentD.getFlagged())
+        square = true;
+      currentD.flag();
+      deletions++;
+      xyDeletes[deletions*2-2] == XMouseToCart(mouseX);
+      xyDeletes[deletions*2-1] == YMouseToCart(mouseY);
+    }
+  }
+  
+}
+
+void mouseReleased(){
+  //check if deletions >0
+  //check if player made a square,
+      //if he did then delete all dots of that color, give points
+      //else give points, delete the selected dots using xyDeletes[]
+  //drop all the stuff
+  //add new stuff
+  //reset the variables? maybe not necessary
+}
+  
+  
+  
+  
+  
+  
+  
