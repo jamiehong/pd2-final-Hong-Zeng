@@ -24,10 +24,11 @@ void setup() {
       // Scaling up to draw a rectangle at (x,y)
       int x = i*videoScale*2;
       int y = j*videoScale*2+150;
-      fill(a.randColor());
+      color tempC = a.randColor();
+      a.set(new Dot(tempC), i-3, j-3);
+      fill(tempC);
       stroke(0);
-      // For every column and row, a rectangle is drawn at an (x,y) location scaled and sized by videoScale.
-      ellipse(x,y,videoScale,videoScale); 
+      
     }
   }
   noLoop();
@@ -37,3 +38,28 @@ void draw() {
   
 
 }
+
+int XMouseToCart(int x){
+  if (x >= 138 && x <= 412){
+    if (x <= 162)
+      return 0;
+    else if (x >= 188 && x <= 212)
+      return 1;
+    else if (x >= 238 && x <= 262)
+      return 2;
+    else if (x >= 288 && x <= 312)
+      return 3;
+    else if (x >= 338 && x <= 362)
+      return 4;
+    else if (x >= 388)
+      return 5;
+    else
+      return -1;
+  }
+  else return -1;
+}
+
+int YMouseToCart(int y){
+  return XMouseToCart(y - 150);
+}
+    
