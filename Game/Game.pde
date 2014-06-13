@@ -1,8 +1,11 @@
 
 int videoScale = 25;
+int time;
+int score;
 
-// Number of columns and rows in our system
-int cols, rows;
+Dot start; //the first dot you click
+Dot current; //the dot being worked on
+
 
 void setup() {
   
@@ -39,6 +42,7 @@ void draw() {
 
 }
 
+
 int XMouseToCart(int x){
   if (x >= 138 && x <= 412){
     if (x <= 162)
@@ -63,3 +67,11 @@ int YMouseToCart(int y){
   return XMouseToCart(y - 150);
 }
     
+int XCartToMouse(int x){
+  return (x+3)*50;
+}
+
+int YCartToMouse(int y){
+  return (y+6)*50+150;
+}
+
