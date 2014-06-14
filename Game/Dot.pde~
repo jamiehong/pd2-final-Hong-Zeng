@@ -1,19 +1,13 @@
 public class Dot{
-  private color col;
-  private int xCor;
-  private int yCor;
-  private Dot next;
-  private Board brd;
-    
-  public Dot(color a, int x, int y){
-      col = a;
-      xCor = x;
-      yCor = y;
-      next = null;
-  }
-
-  public void drop(){
-  }  
+  private color colr;
   
-
+  private int xcor;
+  private int ycor; 
+  
+  public Dot(color a){
+      col = a;
+      next = null;
+  }    
+  
+  public color getColor(){return colr;}
 }
