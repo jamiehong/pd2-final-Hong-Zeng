@@ -2,8 +2,7 @@ public class Board{
   private Dot[][] dots;
   private int score;
   public color[] colors;
-  
-  
+    
   public Board(){
     colors = new color[5];
     colors[0] = color(#FF7575);
@@ -19,5 +18,30 @@ public class Board{
      return colors[a];
   }
 
+  public void set(Dot d, int x, int y){
+     dots[x][y] = d;
+  }
+  public void drop(int xcor, int ycor){
+    clearDot(xcor, ycor);
+    add();
+  }
 
+//clears a dot by moving the dots on top of it down, and makes the top dots null
+  public void clearDot(int xcor, int ycor){
+     for(int a = xcor; a > 1; a--){
+        dots[a][ycor] = dots[a - 1][ycor];
+     }dots[0][ycor] = null;
+  } 
+//adds random colored dots to places in the array that are null;
+  public void add(){
+     for (a = 0; a < dots.length; a++){
+       for (b= 0; b < dots[0].length; b++){
+          if(dots[a][b] = null){
+	     dots[a][b] = new Dot(randColor());
+	  }else{b = b+dots[0].length;}
+       }
+     }
+  }
+
+ 
 }
