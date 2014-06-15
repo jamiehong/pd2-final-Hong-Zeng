@@ -59,7 +59,7 @@ void draw() {
   if (time < 0){
     background(0);
     textSize(40);
-    text("" + score, 20, 10, 100, 50);
+    text("Score:" + score, 20, 10, 300, 150);
     noLoop();
   }
 }
@@ -101,16 +101,16 @@ int XCartToMouse(int x){
 }
 
 int YCartToMouse(int y){
-  return (y+6)*50+150;
+  return (y+6)*50;
 }
 
 boolean within(int x, int y){   //true if mouse is on the dot, false if not.. inputs 0-5
-  if (x < 0 || x > 5 || y < 0 || x > 5)
+  if (x < 0 || x > 5 || y < 0 || y > 5)
     return false;
   else{
-    int a = XCartToMouse(x);
-    int b = YCartToMouse(y);
-    if (abs(a-mouseX) <= 12 && abs(b-mouseY) <= 12)
+    int i = XCartToMouse(x);
+    int j = YCartToMouse(y);
+    if (abs(i-mouseX) <= 12 && abs(j-mouseY) <= 12)
       return true;
     else
       return false;
@@ -129,8 +129,9 @@ void mousePressed(){
     xyDeletes[1] = y;
   }
   
-
 }
+
+
 
 
 void mouseDragged(){
@@ -145,16 +146,18 @@ void mouseDragged(){
     woah = a.getDot(x+1,y);
   else if (within(x,y+1))
     woah = a.getDot(x,y+1);
-    
+
   if (woah != null && 
       woah.getColor() == currentD.getColor()){
     if (woah.equals(currentD.getPrev())){
+      print("revert");
       deletions--;
       currentD.unFlag();
       currentD = currentD.getPrev();
       
     }
     else{
+      print("selcetd");
       woah.setPrev(currentD);
       currentD = woah;
       if (currentD.getFlagged())

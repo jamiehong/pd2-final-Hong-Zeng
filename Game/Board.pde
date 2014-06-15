@@ -39,10 +39,10 @@ public class Board{
 //adds random colored dots to places in the array that are null;
   public void add(){
      for (int a = 0; a < dots.length; a++){
-       for (int b= 0; b < dots[0].length; b++){
+       for (int b= dots[0].length-1; b >= 0; b--){
           if(dots[a][b] == null){
 	     dots[a][b] = new Dot(randColor());
-	  }else{b = b+dots[0].length;}
+	  }else{break;}
        }
      }
   }
