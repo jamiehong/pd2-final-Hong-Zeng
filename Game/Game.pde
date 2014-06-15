@@ -6,7 +6,7 @@ int score;
 Dot currentD; //the dot being worked on
 int[] xyDeletes = new int[72]; //to store xy of dots to be deleted
 int deletions; //# of deletions
-Board a;
+Board a = new Board();
 boolean square; //if you make a square, all dots of that color get deleted.
 
 void setup() {
@@ -15,8 +15,8 @@ void setup() {
   size(600, 800);
   
   // Initialize columns and rows
-  cols = width/videoScale;
-  rows = height/videoScale;
+//  int cols = width/videoScale;
+//  int rows = height/videoScale;
 
   background(225);
 
@@ -29,10 +29,10 @@ void setup() {
       int x = i*videoScale*2;
       int y = j*videoScale*2+150;
       color tempC = a.randColor();
-      a.set(new Dot(tempC), i-3, j-3);
+      a.set(new Dot(tempC),i-3,j-3);
       fill(tempC);
       stroke(0);
-      
+      ellipse(x,y,videoScale,videoScale);
     }
   }
   noLoop();
@@ -90,7 +90,7 @@ boolean within(int x, int y){   //true if mouse is on the dot, false if not.. in
 }//needs testing
 
 void mousePressed(){
-  /*
+ 
   int x = XMouseToCart(mouseX);
   int y = YMouseToCart(mouseY);
   if (x != -1 && y!= -1){
@@ -101,27 +101,25 @@ void mousePressed(){
     xyDeletes[1] = y;
   }
   
-  */
-  //to test the conversions
-  println(XMouseToCart(mouseX));
-  println(YMouseToCart(mouseY));
+
 }
 
 
 void mouseDragged(){
   int x = xyDeletes[deletions*2-2];
   int y = xyDeletes[deletions*2-1];
-  Dot woah;
+  Dot woah = null;
   if (within(x-1,y))
-    woah = a[x-1,y];
+    woah = a.getDot(x-1,y);
   else if (within(x,y-1))
-    woah = a[x,y-1];
+    woah = a.getDot(x,y-1);
   else if (within(x+1,y))
-    woah = a[x+1,y];
+    woah = a.getDot(x+1,y);
   else if (within(x,y+1))
-    woah = a[x,y+1];
+    woah = a.getDot(x,y+1);
     
-  if (woah != null && woah.getColor().equals(currentD.getColor())){
+  if (woah != null && 
+      woah.getColor() == currentD.getColor()){
     if (woah.equals(currentD.getPrev())){
       deletions--;
       currentD.unFlag();
@@ -129,14 +127,14 @@ void mouseDragged(){
       
     }
     else{
-      woah.setPrev(currentD)
+      woah.setPrev(currentD);
       currentD = woah;
       if (currentD.getFlagged())
         square = true;
       currentD.flag();
       deletions++;
-      xyDeletes[deletions*2-2] == XMouseToCart(mouseX);
-      xyDeletes[deletions*2-1] == YMouseToCart(mouseY);
+      xyDeletes[deletions*2-2] = XMouseToCart(mouseX);
+      xyDeletes[deletions*2-1] = YMouseToCart(mouseY);
     }
   }
   

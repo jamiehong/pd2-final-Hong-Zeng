@@ -5,14 +5,10 @@ public class Dot{
   private boolean flagged; //used for square interaction
 
   
-  public Dot(color a){
-      colr = a;     
-  }    
-
 
   public Dot(color a){
       colr = a;
-      next = null;
+      prev = null;
   }
 
   public color getColor(){return colr;}
@@ -28,6 +24,7 @@ public class Dot{
 
   public boolean getFlagged(){return flagged;}
   public void flag(){flagged = true;}
+  public void unFlag(){flagged = false;}
 
 
 }

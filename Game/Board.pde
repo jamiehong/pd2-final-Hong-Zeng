@@ -10,12 +10,16 @@ public class Board{
     colors[2] = color(#9932CC);
     colors[3] = color(#FFD700);
     colors[4] = color(#000080);
-      
+    dots = new Dot[6][6];
   }
   
   public color randColor(){
      int a = (int) (5* Math.random());
      return colors[a];
+  }
+
+  public Dot getDot(int x, int y){
+    return dots[x][y];
   }
 
   public void set(Dot d, int x, int y){
@@ -34,9 +38,9 @@ public class Board{
   } 
 //adds random colored dots to places in the array that are null;
   public void add(){
-     for (a = 0; a < dots.length; a++){
-       for (b= 0; b < dots[0].length; b++){
-          if(dots[a][b] = null){
+     for (int a = 0; a < dots.length; a++){
+       for (int b= 0; b < dots[0].length; b++){
+          if(dots[a][b] == null){
 	     dots[a][b] = new Dot(randColor());
 	  }else{b = b+dots[0].length;}
        }
