@@ -1,17 +1,18 @@
 
 int videoScale = 25;
-int time;
+int pTime;
+int time = 60;
 int score;
 
 Dot currentD; //the dot being worked on
 int[] xyDeletes = new int[72]; //to store xy of dots to be deleted
 int deletions; //# of deletions
-Board a = new Board();
+Board a;
 boolean square; //if you make a square, all dots of that color get deleted.
 
 void setup() {
   
-
+  a = new Board();
   size(600, 800);
   
   // Initialize columns and rows
@@ -29,18 +30,45 @@ void setup() {
       int x = i*videoScale*2;
       int y = j*videoScale*2+150;
       color tempC = a.randColor();
-      a.set(new Dot(tempC),i-3,j-3);
       fill(tempC);
-      stroke(0);
+      noStroke();
       ellipse(x,y,videoScale,videoScale);
+      a.set(new Dot(tempC),i-3,j-3);
     }
   }
-  noLoop();
+
+  pTime = second();
+  time = 62;
+  fill(0);
+  rect(0,0,100,50);
+  fill(225);
+  textSize(20);
+  text(""+time, 20,10,60,30);
 }
 
 void draw() { 
-  
+  if (62 - timeLapsed() != time){
+    time -= 1;
+    
+    fill(0);
+    rect(0,0,100,50);
+    fill(225);
+    textSize(20);
+    text(""+time, 20,10,60,30);
+  }
+  if (time < 0){
+    background(0);
+    textSize(40);
+    text("" + score, 20, 10, 100, 50);
+    noLoop();
+  }
+}
 
+int timeLapsed(){
+  if (second() - pTime < 0)
+    return second() - pTime + 60;
+  else
+    return second() - pTime;
 }
 
 
@@ -94,7 +122,7 @@ void mousePressed(){
   int x = XMouseToCart(mouseX);
   int y = YMouseToCart(mouseY);
   if (x != -1 && y!= -1){
-    currentD = a.get(x,y);
+    currentD = a.getDot(x,y);
     currentD.flag();
     deletions = 1;
     xyDeletes[0] = x;
@@ -141,6 +169,15 @@ void mouseDragged(){
 }
 
 void mouseReleased(){
+  if(deletions > 1){
+    if(square){
+      print("SQUARE!");
+      
+    }
+    else{
+    
+    }
+  }
   //check if deletions >0
   //check if player made a square,
       //if he did then delete all dots of that color, give points
