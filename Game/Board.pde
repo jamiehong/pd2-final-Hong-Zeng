@@ -28,10 +28,10 @@ public class Board{
   
 //clears a dot by moving the dots on top of it down, and makes the top dot a rand color
   public void dropDot(){
-     for (x = dots.length-1; x >= 0; x --){
-       for(y = dots[0].length-1; y >=0; y--){
+     for (int x = dots.length-1; x >= 0; x --){
+       for(int y = dots[0].length-1; y >=0; y--){
          while (dots[x][y] = null){
-	   for (a = dots.length-1; a > 0; a--){
+	   for (int a = y; a > 0; a--){
 	     dots[a][y]= dots[a-1][y];
 	   }
 	   dots[0][y] = new Dot(randColor());
