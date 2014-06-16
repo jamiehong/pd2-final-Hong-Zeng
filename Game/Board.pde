@@ -30,11 +30,11 @@ public class Board{
   public void dropDot(){
      for (int x = dots.length-1; x >= 0; x --){
        for(int y = dots[0].length-1; y >=0; y--){
-         while (dots[x][y] = null){
+         while (dots[x][y] == null){
 	   for (int a = y; a > 0; a--){
-	     dots[a][y]= dots[a-1][y];
+	     dots[x][a]= dots[x][a-1];
 	   }
-	   dots[0][y] = new Dot(randColor());
+	   dots[x][0] = new Dot(randColor());
 	 } 
        } 
      }

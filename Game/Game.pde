@@ -50,15 +50,16 @@ void draw() {
   if (62 - timeLapsed() != time){
     time -= 1;
     
-    fill(0);
-    rect(0,0,100,50);
     fill(225);
+    rect(0,0,100,50);
+    fill(0);
     textSize(20);
-    text(""+time, 20,10,60,30);
+    text("Time:"+time, 20,10,100,30);
   }
   if (time < 0){
     background(0);
     textSize(40);
+    fill(225);
     text("Score:" + score, 20, 10, 300, 150);
     noLoop();
   }
@@ -135,52 +136,94 @@ void mousePressed(){
 
 
 void mouseDragged(){
-  int x = xyDeletes[deletions*2-2];
-  int y = xyDeletes[deletions*2-1];
-  Dot woah = null;
-  if (within(x-1,y))
-    woah = a.getDot(x-1,y);
-  else if (within(x,y-1))
-    woah = a.getDot(x,y-1);
-  else if (within(x+1,y))
-    woah = a.getDot(x+1,y);
-  else if (within(x,y+1))
-    woah = a.getDot(x,y+1);
+  if (deletions > 0){
+    int x = xyDeletes[deletions*2-2];
+    int y = xyDeletes[deletions*2-1];
+    Dot woah = null;
+    if (within(x-1,y))
+      woah = a.getDot(x-1,y);
+    else if (within(x,y-1))
+      woah = a.getDot(x,y-1);
+    else if (within(x+1,y))
+      woah = a.getDot(x+1,y);
+    else if (within(x,y+1))
+      woah = a.getDot(x,y+1);
 
-  if (woah != null && 
-      woah.getColor() == currentD.getColor()){
-    if (woah.equals(currentD.getPrev())){
-      print("revert");
-      deletions--;
-      currentD.unFlag();
-      currentD = currentD.getPrev();
+    if (woah != null && 
+        woah.getColor() == currentD.getColor()){
+      if (woah.equals(currentD.getPrev())){
+        print("revert");
+        deletions--;
+        currentD.unFlag();
+        currentD = currentD.getPrev();
       
+      }
+      else{
+        print("selcetd");
+        woah.setPrev(currentD);
+        currentD = woah;
+        if (currentD.getFlagged())
+          square = true;
+        currentD.flag();
+        deletions++;
+        xyDeletes[deletions*2-2] = XMouseToCart(mouseX);
+        xyDeletes[deletions*2-1] = YMouseToCart(mouseY);
+      }
     }
-    else{
-      print("selcetd");
-      woah.setPrev(currentD);
-      currentD = woah;
-      if (currentD.getFlagged())
-        square = true;
-      currentD.flag();
-      deletions++;
-      xyDeletes[deletions*2-2] = XMouseToCart(mouseX);
-      xyDeletes[deletions*2-1] = YMouseToCart(mouseY);
+  }  
+}
+
+void delay(int x){
+  int now = millis();
+  while(millis() - now < x){}
+}
+
+void updateScore(){
+  fill(225);
+  rect(500, 0, 100, 50);
+  fill(0);
+  textSize(20);
+  text(""+score, 520,10,80,40);
+}
+
+void update(){
+  fill(225);
+  rect(0,150,600,650);
+  for (int i = 0; i < 6; i++) {
+    for (int j = 0; j < 6; j++) {
+      
+      int x = (i+3)*videoScale*2;
+      int y = (j+3)*videoScale*2+150;
+      fill(a.getDot(i,j).getColor());
+      noStroke();
+      ellipse(x,y,videoScale,videoScale);
     }
   }
-  
 }
 
 void mouseReleased(){
   if(deletions > 1){
     if(square){
-      print("SQUARE!");
-      
+      square = false;
+      print("SQUARE!"); // for testing purposes
+      //Square interaction...
     }
     else{
-    
+      score += deletions;
+      fill(255);
+      for(int asd = deletions; asd > 0; asd--){
+        int xcoor = xyDeletes[asd*2-2];
+        int ycoor = xyDeletes[asd*2-1];
+      //  ellipse(XCartToMouse(xcoor),YCartToMouse(ycoor),videoScale,videoScale);
+        a.set(null,xcoor,ycoor);
+      }
+      delay(100);
+      deletions = 0;
+      a.dropDot();
+      update();
+      updateScore();
     }
-  }
+    
   //check if deletions >0
   //check if player made a square,
       //if he did then delete all dots of that color, give points
@@ -188,6 +231,7 @@ void mouseReleased(){
   //drop all the stuff
   //add new stuff
   //reset the variables? maybe not necessary
+  }
 }
   
   
