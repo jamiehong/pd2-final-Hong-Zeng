@@ -15,18 +15,13 @@ void setup() {
   a = new Board();
   size(600, 800);
   
-  // Initialize columns and rows
-//  int cols = width/videoScale;
-//  int rows = height/videoScale;
+
 
   background(225);
 
-  // Begin loop for columns
   for (int i = 3; i < 9; i++) {
-    // Begin loop for rows
     for (int j = 3; j < 9; j++) {
       
-      // Scaling up to draw a rectangle at (x,y)
       int x = i*videoScale*2;
       int y = j*videoScale*2+150;
       color tempC = a.randColor();
@@ -57,6 +52,7 @@ void draw() {
     textSize(20);
     text("Time:"+time, 20,10,100,30);
   }
+  
   if (time < 0){
     background(0);
     textSize(40);
@@ -64,6 +60,7 @@ void draw() {
     text("Score:" + score, 20, 10, 300, 150);
     noLoop();
   }
+  
 }
 
 int timeLapsed(){
@@ -169,7 +166,7 @@ void mouseDragged(){
       
       }
       else{
-        print("selcetd");
+        //print("selcetd");
         woah.setPrev(currentD);
         currentD = woah;
         if (currentD.getFlagged())
@@ -221,10 +218,8 @@ void mouseReleased(){
       score += a.square(currentD.getColor());
       deletions = 0;
       a.dropDot();
-      update();
+
       updateScore();
-      print("SQUARE!"); // for testing purposes
-      //Square interaction...
     }
     else{
       score += deletions;
@@ -232,25 +227,19 @@ void mouseReleased(){
       for(int asd = deletions; asd > 0; asd--){
         int xcoor = xyDeletes[asd*2-2];
         int ycoor = xyDeletes[asd*2-1];
-      //  ellipse(XCartToMouse(xcoor),YCartToMouse(ycoor),videoScale,videoScale);
         a.set(null,xcoor,ycoor);
       }
       delay(100);
       deletions = 0;
       a.dropDot();
-      update();
       updateScore();
     }
-    
-  //check if deletions >0
-  //check if player made a square,
-      //if he did then delete all dots of that color, give points
-      //else give points, delete the selected dots using xyDeletes[]
-  //drop all the stuff
-  //add new stuff
-  //reset the variables? maybe not necessary
-  }
 
+  }
+  else if(deletions == 1)
+    currentD.unFlag();
+  a.checkMoves();
+  update();
 }
   
   
