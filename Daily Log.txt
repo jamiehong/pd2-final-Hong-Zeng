@@ -1,0 +1,26 @@
+Daily Log
+
+6/9 - 
+We decided on Dots as our project. We created the basic classes in processing and began thinking about how to code the stuffs.
+
+6/10 - 
+We picked the colors for our dots ;D
+
+6/11 - 
+We began working on the visuals. Most of the day was spent learning how to create stuff in processing
+
+6/12 - 
+Not quite sure of how we were going to code the Dot class, some changes were made. Dot would undergo more changes in the future as we realized what was needed.
+
+6/13 - 
+Most of the functionalities of the game were made today. Joey worked on the communication between the mouse coordinates and the dot's almost-Cartesian coordinates. He also coded the mousePressed() and mouseDragged() methods. He started the mouseReleased(). Jamie created her first version of the drop methods, which is supposed to drop the dots to the vacancies from clearing dots and create new dots.
+
+6/14 - 
+chill day
+
+6/15 -
+Joey woke up early, fixed syntax errors and github mistakes, finished the mouseReleased(), created the timer. Miscommunication lead to a mistake in the implementation of Jamie's drop method, so she fixed it. After some bug fixes the game can finally be played, but it does not have all of its functionalities yet.
+
+6/16 -
+The square interaction was completed. We noticed that while playing the game, it is possible to have no moves left, so we solved that by reassigning dot colors whenever there are no moves. Some new visuals made the game easier to play.
+FINISHED PROJECTTTTTTTTT

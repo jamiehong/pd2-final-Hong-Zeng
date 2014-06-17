@@ -1,5 +1,0 @@
-Salmon: #FF7575
-Turquoise: # 48D1CC
-Purple: #9932CC
-Gold: #FFD700
-Navy: #000080
