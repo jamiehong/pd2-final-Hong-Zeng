@@ -39,6 +39,17 @@ public class Board{
        } 
      }
   }
-
- 
+  
+  public int square(color c){
+    int retInt = 0;
+    for(int x = 0; x < dots.length; x++){
+      for(int y = 0; y < dots[0].length; y++){
+        if (dots[x][y].getColor() == c){
+          dots[x][y] = null;
+          retInt++;
+        }
+      }
+    }
+    return retInt;
+  }
 }

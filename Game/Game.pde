@@ -51,6 +51,7 @@ void draw() {
     time -= 1;
     
     fill(225);
+    noStroke();
     rect(0,0,100,50);
     fill(0);
     textSize(20);
@@ -132,7 +133,16 @@ void mousePressed(){
   
 }
 
+void connect(int x1, int y1, int x2, int y2, color c){
+  int xx1 = XCartToMouse(x1)/10;
+  int yy1 = YCartToMouse(y1)/10;
+  int xx2 = XCartToMouse(x2)/10;
+  int yy2 = YCartToMouse(y2)/10;
+  stroke(c);
+  strokeWeight(5);
+  line(xx1*4+xx2*6, yy1*4+yy2*6 ,xx2*4+xx1*6 ,yy2*4+yy1*6);
 
+}
 
 
 void mouseDragged(){
@@ -152,7 +162,7 @@ void mouseDragged(){
     if (woah != null && 
         woah.getColor() == currentD.getColor()){
       if (woah.equals(currentD.getPrev())){
-        print("revert");
+        connect(xyDeletes[deletions*2-2],xyDeletes[deletions*2-1],xyDeletes[deletions*2-4],xyDeletes[deletions*2-3],color(225));
         deletions--;
         currentD.unFlag();
         currentD = currentD.getPrev();
@@ -168,6 +178,7 @@ void mouseDragged(){
         deletions++;
         xyDeletes[deletions*2-2] = XMouseToCart(mouseX);
         xyDeletes[deletions*2-1] = YMouseToCart(mouseY);
+        connect(xyDeletes[deletions*2-2],xyDeletes[deletions*2-1],xyDeletes[deletions*2-4],xyDeletes[deletions*2-3],currentD.getColor());
       }
     }
   }  
@@ -180,6 +191,7 @@ void delay(int x){
 
 void updateScore(){
   fill(225);
+  noStroke();
   rect(500, 0, 100, 50);
   fill(0);
   textSize(20);
@@ -188,6 +200,7 @@ void updateScore(){
 
 void update(){
   fill(225);
+  noStroke();
   rect(0,150,600,650);
   for (int i = 0; i < 6; i++) {
     for (int j = 0; j < 6; j++) {
@@ -205,6 +218,11 @@ void mouseReleased(){
   if(deletions > 1){
     if(square){
       square = false;
+      score += a.square(currentD.getColor());
+      deletions = 0;
+      a.dropDot();
+      update();
+      updateScore();
       print("SQUARE!"); // for testing purposes
       //Square interaction...
     }
