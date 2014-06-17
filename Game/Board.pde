@@ -52,4 +52,36 @@ public class Board{
     }
     return retInt;
   }
+
+  public void checkMoves(){
+     for (int x = 0; x < dots.length; x++){
+      for (int y = 0; y < dots[0].length; y++){
+        boolean move = false;
+	try{
+	  if(dots[x+1][y].getColor() = dots[x][y].getColor()){
+	    move = true;
+	  }if(dots[x-1][y].getColor() = dots[x][y].getColor()){
+	    move = true;
+	  }if(dots[x][y+1].getColor() = dots[x][y].getColor()){
+	    move = true;
+	  }if(dots[x][y-1].getColor() = dots[x][y].getColor()){
+	    move = true;
+	  }	  
+	}catch(IndexArrayOutOfBoundsExecption e){}
+      	if(move = false){
+	scramble();
+	return;
+	}
+     	}
+      }
+     }
+  }
+
+  private void scramble(){
+     for (x=0;x<dots.length();x++){
+       for(y=0;y<dots[0].length();y++){
+         dots[x][y] = new Dot(randColor());
+       }
+     }
+  }
 }
